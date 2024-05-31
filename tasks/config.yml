@@ -1,13 +1,20 @@
 ---
-
 - name: "Ensure unzip is installed"
   ansible.builtin.package:
     name: "unzip"
     state: present
 
-- name: "Create MDATP directories"
+- name: "Ensure /opt/microsoft directory exists"
   ansible.builtin.file:
-    path: /etc/opt/microsoft/mdatp/
+    path: "/etc/opt/microsoft"
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+
+- name: "Ensure /opt/microsoft/mdatp directory exists"
+  ansible.builtin.file:
+    path: "/etc/opt/microsoft/mdatp"
     recurse: true
     state: directory
     mode: "0755"

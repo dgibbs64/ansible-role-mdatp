@@ -19,13 +19,7 @@
     state: absent
   when: ansible_pkg_mgr == "yum"
 
-- name: "Ensure all files in /etc/opt/microsoft/mdatp are removed"
-  ansible.builtin.file:
-    path: /etc/opt/microsoft/mdatp/
-    state: directory
-    recurse: true
-
-- name: "Ensure /etc/opt/microsoft/mdatp is removed"
+- name: "Ensure /etc/opt/microsoft/mdatp and all its contents are removed"
   ansible.builtin.file:
     path: /etc/opt/microsoft/mdatp/
     state: absent
