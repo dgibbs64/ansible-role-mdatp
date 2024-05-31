@@ -28,7 +28,7 @@
   ansible.builtin.dpkg_selections:
     name: "mdatp"
     selection: install
-  when: ansible_os_family == "Debian" and mdatp_apt_package_version_hold | default('') == ''
+  when: ansible_os_family == "Debian" and mdatp_connectivity_test
 
 - name: "Remove version lock on mdatp package (RedHat Family)"
   community.general.yum_versionlock:
