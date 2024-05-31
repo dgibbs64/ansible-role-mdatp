@@ -15,7 +15,6 @@
 - name: "Ensure /opt/microsoft/mdatp directory exists"
   ansible.builtin.file:
     path: "/etc/opt/microsoft/mdatp"
-    recurse: true
     state: directory
     mode: "0755"
     owner: root
