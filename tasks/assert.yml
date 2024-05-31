@@ -1,0 +1,57 @@
+---
+# defaults file for mdatp
+
+# mdatp_apt_package_version_hold:
+# mdatp_connectivity_test: false
+# mdatp_health_test: true
+# # Microsoft repository channel insiders-fast|insiders-slow|prod
+# mdatp_health_test: "prod"
+# # MDATP Onboaring Package file location
+# mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage.zip"
+# mdatp_state: "present"
+# # MDATP YUM package version lock mdatp-101.24032.0007-1
+# mdatp_yum_package_version:
+# # Prevent the microsoft repository from being installed
+# mdatp_microsoft_repo_install_disable: false
+
+- name: "Test if mdatp_connectivity_test is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_connectivity_test is defined
+      - mdatp_connectivity_test is boolean
+    quiet: true
+
+- name: "Test if mdatp_health_test is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_health_test is defined
+      - mdatp_health_test is boolean
+    quiet: true
+
+- name: "Test if mdatp_microsoft_repo_channel is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_microsoft_repo_channel is defined
+      - mdatp_microsoft_repo_channel in ['insiders-fast', 'insiders-slow', 'prod']
+    quiet: true
+
+- name: "Test if mdatp_onboarding_package_location is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_onboarding_package_location is defined
+      - mdatp_onboarding_package_location is string
+    quiet: true
+
+- name: "Test if mdatp_state is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_state is defined
+      - mdatp_state in ['present', 'absent']
+    quiet: true
+
+- name: "Test if mdatp_microsoft_repo_install_disable is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_microsoft_repo_install_disable is defined
+      - mdatp_microsoft_repo_install_disable is boolean
+    quiet: true
