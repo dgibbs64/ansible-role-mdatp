@@ -1,0 +1,31 @@
+---
+- name: "Ensure mdatp is removed (apt)"
+  ansible.builtin.apt:
+    name: "mdatp"
+    state: absent
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_pkg_mgr == "apt"
+
+- name: "Ensure mdatp is removed (dnf)"
+  ansible.builtin.dnf:
+    name: "mdatp"
+    state: absent
+  when: ansible_pkg_mgr == "dnf"
+
+- name: "Ensure mdatp is removed (yum)"
+  ansible.builtin.yum:
+    name: "mdatp"
+    state: absent
+  when: ansible_pkg_mgr == "yum"
+
+- name: "Ensure all files in /etc/opt/microsoft/mdatp are removed"
+  ansible.builtin.file:
+    path: /etc/opt/microsoft/mdatp/
+    state: directory
+    recurse: true
+
+- name: "Ensure /etc/opt/microsoft/mdatp is removed"
+  ansible.builtin.file:
+    path: /etc/opt/microsoft/mdatp/
+    state: absent

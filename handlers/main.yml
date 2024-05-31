@@ -1,0 +1,33 @@
+---
+# handlers file for mdatp
+
+- name: "Update apt cache"
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+  when: ansible_pkg_mgr == "apt"
+
+- name: "Update dnf cache"
+  become: true
+  ansible.builtin.dnf:
+    update_cache: true
+  when: ansible_pkg_mgr == "dnf"
+
+- name: "Update yum cache"
+  become: true
+  ansible.builtin.yum:
+    update_cache: true
+  when: ansible_pkg_mgr == "yum"
+
+- name: "Enable mdatp"
+  become: true
+  ansible.builtin.systemd:
+    name: "mdatp"
+    enabled: true
+    state: started
+
+- name: "Restart mdatp"
+  become: true
+  ansible.builtin.systemd:
+    name: "mdatp"
+    state: started

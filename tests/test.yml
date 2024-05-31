@@ -1,0 +1,19 @@
+---
+- name: "Test"
+  hosts: all
+  gather_facts: false
+  vars:
+    mdatp_apt_package_version_hold:
+    mdatp_connectivity_test: false
+    mdatp_health_test: true
+    # Microsoft repository channel insiders-fast|insiders-slow|prod
+    mdatp_microsoft_repo_channel: "prod"
+    # MDATP Onboaring Package file location
+    mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage-test.zip"
+    mdatp_state: "present"
+    # MDATP YUM package version lock mdatp-101.24032.0007-1
+    mdatp_yum_package_version:
+    # Prevent the microsoft repository from being installed
+    mdatp_microsoft_repo_install_disable: false
+  roles:
+    - "../../ansible-role-mdatp"

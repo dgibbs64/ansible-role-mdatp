@@ -1,0 +1,24 @@
+---
+- name: "Run mdatp health test"
+  ansible.builtin.command: mdatp health
+  register: health_result
+  changed_when: false
+  ignore_errors: true
+  when: mdatp_health_test
+
+- name: "Output if mdatp health fails"
+  ansible.builtin.debug:
+    var: health_result.stderr
+  when: mdatp_health_test and health_result.rc != 0
+
+- name: "Run mdatp connectivity test"
+  ansible.builtin.command: mdatp connectivity test
+  register: connectivity_result
+  changed_when: false
+  ignore_errors: true
+  when: mdatp_connectivity_test
+
+- name: "Output if mdatp connectivity test fails"
+  ansible.builtin.debug:
+    var: connectivity_result.stderr
+  when: mdatp_connectivity_test and result.rc != 0

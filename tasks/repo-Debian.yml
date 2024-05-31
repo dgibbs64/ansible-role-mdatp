@@ -1,0 +1,80 @@
+---
+- name: "Ensure python3-debian and gnupg is installed (Debian Family)"
+  ansible.builtin.apt:
+    name:
+      - gnupg
+      - python3-debian
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: "Add Microsoft repository"
+  when: mdatp_state == "present"
+  notify: "Update apt cache"
+  block:
+    - name: "Ensure Microsoft repository is configured (Debian Family): {{ mdatp_microsoft_repo_channel }}"
+      ansible.builtin.deb822_repository:
+        name: "microsoft-{{ mdatp_microsoft_repo_channel }}"
+        uris: "https://packages.microsoft.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/{{ mdatp_microsoft_repo_channel }}"
+        signed_by: "https://packages.microsoft.com/keys/microsoft.asc"
+        suites: "{{ ansible_distribution_release | lower }}"
+        components: "main"
+        state: present
+        architectures:
+          - amd64
+          - arm64
+          - armhf
+        enabled: true
+      when: ansible_os_family == "Debian" and not ansible_distribution == "Ubuntu"
+
+    - name: "Ensure Microsoft repository is configured (Ubuntu): {{ mdatp_microsoft_repo_channel }}"
+      ansible.builtin.deb822_repository:
+        name: "microsoft-{{ mdatp_microsoft_repo_channel }}"
+        uris: "https://packages.microsoft.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_version }}/{{ mdatp_microsoft_repo_channel }}"
+        signed_by: "https://packages.microsoft.com/keys/microsoft.asc"
+        suites: "{{ ansible_distribution_release | lower }}"
+        components: "main"
+        state: present
+        architectures:
+          - amd64
+          - arm64
+          - armhf
+        enabled: true
+      when: ansible_os_family == "Debian" and ansible_distribution == "Ubuntu"
+
+- name: "Remove Microsoft repository"
+  when: mdatp_state == "absent"
+  notify: "Update apt cache"
+  block:
+    - name: "Ensure Microsoft repository is removed (Debian Family): {{ mdatp_microsoft_repo_channel }}"
+      ansible.builtin.deb822_repository:
+        name: "microsoft-{{ mdatp_microsoft_repo_channel }}"
+        uris: "https://packages.microsoft.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/{{ mdatp_microsoft_repo_channel }}"
+        signed_by: "https://packages.microsoft.com/keys/microsoft.asc"
+        suites: "{{ ansible_distribution_release | lower }}"
+        components: "main"
+        state: present
+        architectures:
+          - amd64
+          - arm64
+          - armhf
+        enabled: true
+      when: ansible_os_family == "Debian" and not ansible_distribution == "Ubuntu"
+
+    - name: "Ensure Microsoft repository is removed (Ubuntu): {{ mdatp_microsoft_repo_channel }}"
+      ansible.builtin.deb822_repository:
+        name: "microsoft-{{ mdatp_microsoft_repo_channel }}"
+        uris: "https://packages.microsoft.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_version }}/{{ mdatp_microsoft_repo_channel }}"
+        signed_by: "https://packages.microsoft.com/keys/microsoft.asc"
+        suites: "{{ ansible_distribution_release | lower }}"
+        components: "main"
+        state: present
+        architectures:
+          - amd64
+          - arm64
+          - armhf
+        enabled: true
+      when: ansible_os_family == "Debian" and ansible_distribution == "Ubuntu"
+
+- name: "Flush handlers"
+  ansible.builtin.meta: flush_handlers

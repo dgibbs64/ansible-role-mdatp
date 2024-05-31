@@ -1,0 +1,29 @@
+---
+- name: "Ensure mdatp is installed (apt)"
+  ansible.builtin.apt:
+    name: "mdatp"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  notify:
+    - "Enable mdatp"
+    - "Restart mdatp"
+  when: ansible_pkg_mgr == "apt"
+
+- name: "Ensure mdatp is installed (dnf)"
+  ansible.builtin.dnf:
+    name: "mdatp"
+    state: present
+  notify:
+    - "Enable mdatp"
+    - "Restart mdatp"
+  when: ansible_pkg_mgr == "dnf"
+
+- name: "Ensure mdatp is installed (yum)"
+  ansible.builtin.yum:
+    name: "mdatp"
+    state: present
+  notify:
+    - "Enable mdatp"
+    - "Restart mdatp"
+  when: ansible_pkg_mgr == "yum"
