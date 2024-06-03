@@ -1,0 +1,8 @@
+---
+- name: "Prepare"
+  hosts: all
+  gather_facts: false
+  vars:
+    mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage-test.zip"
+  roles:
+    - role: "dgibbs64.mdatp"
