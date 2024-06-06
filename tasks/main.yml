@@ -32,8 +32,8 @@
       ansible.builtin.include_tasks: repo-Fedora.yml
       when: ansible_distribution == "Fedora" and not mdatp_microsoft_repo_install_disable
 
-    - name: "Configure repository (OpenSuse)"
-      ansible.builtin.include_tasks: repo-OpenSuse.yml
+    - name: "Configure repository (Suse)"
+      ansible.builtin.include_tasks: repo-Suse.yml
       when: ansible_os_family == "Suse" and not mdatp_microsoft_repo_install_disable
 
     - name: "Configure repository (RedHat Family)"
