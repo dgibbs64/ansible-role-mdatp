@@ -14,7 +14,6 @@
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
         enabled: true
         state: present
-      when: ansible_os_family == "RedHat"
 
 - name: "Remove Microsoft repository"
   when: mdatp_state == "absent"
@@ -31,7 +30,6 @@
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
         enabled: true
         state: absent
-      when: ansible_os_family == "RedHat"
 
 - name: "Flush handlers"
   ansible.builtin.meta: flush_handlers

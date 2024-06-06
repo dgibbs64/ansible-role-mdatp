@@ -5,11 +5,11 @@
     - "Update dnf cache"
     - "Update yum cache"
   block:
-    - name: "Ensure Microsoft repository is configured (RedHat Family): {{ mdatp_microsoft_repo_channel }}"
+    - name: "Ensure Microsoft repository is configured (Amazon Linux): {{ mdatp_microsoft_repo_channel }}"
       ansible.builtin.yum_repository:
         name: "microsoft-{{ mdatp_microsoft_repo_channel }}"
         description: "Microsoft Production"
-        baseurl: "https://packages.microsoft.com/fedora/{{ ansible_distribution_major_version }}/prod"
+        baseurl: "https://packages.microsoft.com/amazonlinux/{{ ansible_distribution_major_version }}/prod"
         gpgcheck: true
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
         enabled: true
@@ -21,11 +21,11 @@
     - "Update dnf cache"
     - "Update yum cache"
   block:
-    - name: "Ensure Microsoft repository is removed (RedHat Family): {{ mdatp_microsoft_repo_channel }}"
+    - name: "Ensure Microsoft repository is removed (Amazon Linux): {{ mdatp_microsoft_repo_channel }}"
       ansible.builtin.yum_repository:
         name: "microsoft-{{ mdatp_microsoft_repo_channel }}"
         description: "Microsoft Production"
-        baseurl: "https://packages.microsoft.com/fedora/{{ ansible_distribution_major_version }}/prod"
+        baseurl: "https://packages.microsoft.com/amazonlinux/{{ ansible_distribution_major_version }}/prod"
         gpgcheck: true
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
         enabled: true

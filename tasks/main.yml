@@ -20,13 +20,13 @@
       ansible.builtin.include_tasks: remove.yml
       when: mdatp_state == "absent"
 
+    - name: "Configure repository (Amazon Linux)"
+      ansible.builtin.include_tasks: repo-AmazonLinux.yml
+      when: ansible_os_family == "RedHat" and ansible_distribution == "Amazon"
+
     - name: "Configure repository (Debian Family)"
       ansible.builtin.include_tasks: repo-Debian.yml
       when: ansible_os_family == "Debian" and not mdatp_microsoft_repo_install_disable
-
-    - name: "Configure repository (RedHat Family)"
-      ansible.builtin.include_tasks: repo-RedHat.yml
-      when: ansible_os_family == "RedHat" and not mdatp_microsoft_repo_install_disable and ansible_distribution != "Fedora"
 
     - name: "Configure repository (Fedora)"
       ansible.builtin.include_tasks: repo-Fedora.yml
@@ -35,6 +35,10 @@
     - name: "Configure repository (OpenSuse)"
       ansible.builtin.include_tasks: repo-OpenSuse.yml
       when: ansible_os_family == "Suse" and not mdatp_microsoft_repo_install_disable
+
+    - name: "Configure repository (RedHat Family)"
+      ansible.builtin.include_tasks: repo-RedHat.yml
+      when: ansible_os_family == "RedHat" and not mdatp_microsoft_repo_install_disable and ansible_distribution != "Fedora"
 
     - name: "Version lock"
       ansible.builtin.include_tasks: version-lock.yml
