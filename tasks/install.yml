@@ -27,3 +27,13 @@
     - "Enable mdatp"
     - "Restart mdatp"
   when: ansible_pkg_mgr == "yum"
+
+- name: "Ensure netdata is installed (zypper)"
+  community.general.zypper:
+    name: "mdatp"
+    state: present
+    update_cache: true
+  notify:
+    - "Enable mdatp"
+    - "Restart mdatp"
+  when: ansible_pkg_mgr == "zypper"
