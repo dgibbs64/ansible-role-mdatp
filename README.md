@@ -24,7 +24,6 @@ Requires a <a href="https://learn.microsoft.com/en-us/defender-endpoint/microsof
 - CentOS >= 7
 - Debian >= 9
 - Fedora >= 33
-- openSUSE >= 15.4
 - OracleLinux >= 8
 - Redhat Enterprise Linux >= 8
 - Rocky Linux >= 8

@@ -28,7 +28,7 @@
     - "Restart mdatp"
   when: ansible_pkg_mgr == "yum"
 
-- name: "Ensure netdata is installed (zypper)"
+- name: "Ensure mdatp is installed (zypper)"
   community.general.zypper:
     name: "mdatp"
     state: present
