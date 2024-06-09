@@ -40,7 +40,7 @@
         name: "yum-plugin-versionlock"
         state: present
 
-    - name: "Version lock mdatp package (RedHat Family): {{ mdatp_yum_package_version }}"
+    - name: "Version lock mdatp package (yum): {{ mdatp_yum_package_version }}"
       community.general.yum_versionlock:
         name: "{{ mdatp_yum_package_version }}"
         state: present
@@ -49,7 +49,10 @@
   ansible.builtin.dpkg_selections:
     name: "mdatp"
     selection: install
-  when: ansible_pkg_mgr == "apt" and mdatp_apt_package_version_hold is false
+  when:
+    - ansible_pkg_mgr == "apt"
+    - mdatp_apt_package_version_hold is false
+    - "'mdatp' in ansible_facts.packages"
 
 - name: "Remove version lock on mdatp package (dnf)"
   community.general.dnf_versionlock:
