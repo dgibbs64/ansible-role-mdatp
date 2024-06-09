@@ -5,6 +5,8 @@
   when: >
     supported_distros | selectattr("name", "equalto", ansible_distribution) | list | length == 0 or
     ansible_distribution_version is version(supported_distros | selectattr("name", "equalto", ansible_distribution) | map(attribute="min_version") | first, "<") or
+    (supported_distros | selectattr("name", "equalto", ansible_distribution) | map(attribute="max_version") | first is not none and
+    ansible_distribution_version is version(supported_distros | selectattr("name", "equalto", ansible_distribution) | map(attribute="max_version") | first, ">")) or
     ansible_architecture not in (supported_distros | selectattr("name", "equalto", ansible_distribution) | map(attribute="supported_architectures", default=[]) | first)
 
 - name: "Display if distro or architecture are supported"

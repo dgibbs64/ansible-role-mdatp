@@ -1,12 +1,12 @@
 ---
 # vars file for mdatp
 supported_distros:
-  - { name: "AlmaLinux", min_version: "8", supported_architectures: "['x86_64']" }
-  - { name: "Amazon", min_version: "2023", supported_architectures: "['x86_64']" }
-  - { name: "CentOS", min_version: "7", supported_architectures: "['x86_64']" }
-  - { name: "Debian", min_version: "9", supported_architectures: "['x86_64']" }
-  - { name: "Fedora", min_version: "33", supported_architectures: "['x86_64']" }
-  - { name: "OracleLinux", min_version: "8", supported_architectures: "['x86_64']" }
-  - { name: "RedHat", min_version: "7", supported_architectures: "['x86_64']" }
-  - { name: "Rocky", min_version: "8", supported_architectures: "['x86_64']" }
-  - { name: "Ubuntu", min_version: "20.04", supported_architectures: "['x86_64']" }
+  - { name: "AlmaLinux", min_version: "8", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "Amazon", min_version: "2023", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "CentOS", min_version: "7", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "Debian", min_version: "9", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "Fedora", min_version: "33", max_version: "39", supported_architectures: "['x86_64']" }
+  - { name: "OracleLinux", min_version: "8", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "RedHat", min_version: "7", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "Rocky", min_version: "8", max_version: null, supported_architectures: "['x86_64']" }
+  - { name: "Ubuntu", min_version: "20.04", max_version: "22.04", supported_architectures: "['x86_64']" }
