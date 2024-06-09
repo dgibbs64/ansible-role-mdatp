@@ -1,37 +1,64 @@
 ---
-- name: "Ensure yum-plugin-versionlock is instaled"
-  ansible.builtin.yum:
-    name: "yum-plugin-versionlock"
-    state: present
-  when: ansible_os_family == "RedHat"
+#when: mdatp_yum_package_version is defined or mdatp_apt_package_version_hold
+- name: "Version lock (apt)"
+  when: ansible_pkg_mgr == "apt"
+  block:
+    - name: "Version lock mdatp package (apt)"
+      ansible.builtin.dpkg_selections:
+        name: "mdatp"
+        selection: hold
+      when:
+        - mdatp_apt_package_version is defined
+        - mdatp_apt_package_version | length > 0
 
-- name: "Version lock mdatp package (Debian Family)"
-  ansible.builtin.dpkg_selections:
-    name: "mdatp"
-    selection: hold
+- name: "Version lock (dnf)"
   when:
-    - ansible_os_family == "RedHat"
-    - mdatp_apt_package_version is defined
-    - mdatp_apt_package_version | length > 0
-
-- name: "Version lock mdatp package (RedHat Family): {{ mdatp_yum_package_version }}"
-  community.general.yum_versionlock:
-    name: "{{ mdatp_yum_package_version }}"
-    state: present
-  when:
-    - ansible_os_family == "RedHat"
+    - ansible_pkg_mgr == "dnf"
     - mdatp_yum_package_version is defined
     - mdatp_yum_package_version is not none
     - mdatp_yum_package_version | length > 0
+  block:
+    - name: "Ensure dnf-plugins-core is instaled (dnf)"
+      ansible.builtin.dnf:
+        name: "dnf-plugins-core"
+        state: present
 
-- name: "Remove version lock on mdatp package (Debian Family)"
+    - name: "Version lock mdatp package (dnf): {{ mdatp_yum_package_version }}"
+      community.general.dnf_versionlock:
+        name: "{{ mdatp_yum_package_version }}"
+        state: present
+
+- name: "Version lock (yum)"
+  when:
+    - ansible_pkg_mgr == "yum"
+    - mdatp_yum_package_version is defined
+    - mdatp_yum_package_version is not none
+    - mdatp_yum_package_version | length > 0
+  block:
+    - name: "Ensure yum-plugin-versionlock is instaled (yum)"
+      ansible.builtin.yum:
+        name: "yum-plugin-versionlock"
+        state: present
+
+    - name: "Version lock mdatp package (RedHat Family): {{ mdatp_yum_package_version }}"
+      community.general.yum_versionlock:
+        name: "{{ mdatp_yum_package_version }}"
+        state: present
+
+- name: "Remove version lock on mdatp package (apt)"
   ansible.builtin.dpkg_selections:
     name: "mdatp"
     selection: install
-  when: ansible_os_family == "Debian" and mdatp_connectivity_test
+  when: ansible_pkg_mgr == "apt" and mdatp_apt_package_version_hold is false
 
-- name: "Remove version lock on mdatp package (RedHat Family)"
+- name: "Remove version lock on mdatp package (dnf)"
+  community.general.dnf_versionlock:
+    name: "mdatp"
+    state: absent
+  when: ansible_pkg_mgr == "dnf" and mdatp_yum_package_version | default('') == ''
+
+- name: "Remove version lock on mdatp package (yum)"
   community.general.yum_versionlock:
     name: "mdatp"
     state: absent
-  when: ansible_os_family == "RedHat" and mdatp_yum_package_version | default('') == ''
+  when: ansible_pkg_mgr == "yum" and mdatp_yum_package_version | default('') == ''
