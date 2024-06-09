@@ -34,7 +34,7 @@
 
     - name: "Configure repository (RedHat Family)"
       ansible.builtin.include_tasks: repo-RedHat.yml
-      when: ansible_os_family == "RedHat" and not mdatp_microsoft_repo_install_disable and ansible_distribution != "Fedora"
+      when: ansible_os_family == "RedHat" and not mdatp_microsoft_repo_install_disable and ansible_distribution != "Fedora" and ansible_distribution != "Amazon"
 
     - name: "Version lock"
       ansible.builtin.include_tasks: version-lock.yml
