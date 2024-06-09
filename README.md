@@ -40,15 +40,29 @@ mdatp_connectivity_test: false
 mdatp_health_test: true
 # Microsoft repository channel insiders-fast|insiders-slow|prod
 mdatp_microsoft_repo_channel: "prod"
-# MDATP Onboaring Package file location
+# Prevent the microsoft repository from being installed
+mdatp_microsoft_repo_install_disable: false
+# MDATP Onboarding Package file location
 mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage.zip"
-# MDATP state present|absents
+# MDATP state present|absent
 mdatp_state: "present"
 # MDATP YUM package version lock mdatp-101.24032.0007-1
 mdatp_yum_package_version:
-# Prevent the microsoft repository from being installed
-mdatp_microsoft_repo_install_disable: false
 ```
+
+## MDATP Health Test
+
+This role can run a health test on the MDATP client as well as a connectivity test to Microsoft.
+
+### Microsoft Repository
+
+This role will install the Microsoft repository. If you wish to disable this as you use your own repository, set `mdatp_microsoft_repo_install_disable` to `true`.
+
+### Version Lock
+
+Version lock is available as `mdatp_apt_package_version_hold` for apt and `mdatp_yum_package_version` for dnf/yum.
+`mdatp_apt_package_version_hold` uses apt-mark hold that will prevent the package from being upgraded to a newer version.
+`mdatp_yum_package_version` will lock the package to the specified version.
 
 ## Dependencies
 
