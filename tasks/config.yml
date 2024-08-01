@@ -25,7 +25,7 @@
     path: /etc/opt/microsoft/mdatp/mdatp_onboard.json
   register: mdatp_onboard
 
-- name: Extract WindowsDefenderATPOnboardingPackage.zip into /etc/opt/microsoft/mdatp
+- name: "Extract WindowsDefenderATPOnboardingPackage.zip into /etc/opt/microsoft/mdatp"
   ansible.builtin.unarchive:
     src: "{{ mdatp_onboarding_package_location }}"
     dest: "/etc/opt/microsoft/mdatp"
