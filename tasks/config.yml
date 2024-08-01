@@ -20,7 +20,7 @@
     owner: root
     group: root
 
-- name: "Register mdatp_onboard.json"
+- name: "Check if mdatp_onboard.json exists"
   ansible.builtin.stat:
     path: /etc/opt/microsoft/mdatp/mdatp_onboard.json
   register: mdatp_onboard
@@ -36,3 +36,15 @@
     - "Enable mdatp"
     - "Restart mdatp"
   when: not mdatp_onboard.stat.exists
+
+- name: "Apply mdatp_managed.json template"
+  ansible.builtin.template:
+    src: "mdatp_managed.json.j2"
+    dest: "/etc/opt/microsoft/mdatp/mdatp_managed.json"
+    mode: "0600"
+    owner: root
+    group: root
+  when: mdatp_managed_json_template
+  notify:
+    - "Enable mdatp"
+    - "Restart mdatp"
