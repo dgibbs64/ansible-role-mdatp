@@ -8,7 +8,7 @@ mdatp_connectivity_test: false
 # Test health of MDATP
 mdatp_health_test: true
 # Apply mdatp_managed.json template
-mdatp_managed_json_template: "false"
+mdatp_managed_json_template: false
 # MDATP Onboarding Package file location
 mdatp_managed_json_location: "mdatp_managed.json.j2"
 # Microsoft repository channel insiders-fast|insiders-slow|prod
