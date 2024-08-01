@@ -32,12 +32,16 @@ Requires a <a href="https://learn.microsoft.com/en-us/defender-endpoint/microsof
 ## Role Variables
 
 ```yaml
-# enable apt-mark hold
+# Enable apt-mark hold
 mdatp_apt_package_version_hold: false
 # Test connectivity to Microsoft
 mdatp_connectivity_test: false
 # Test health of MDATP
 mdatp_health_test: true
+# Apply mdatp_managed.json template
+mdatp_managed_json_template: "false"
+# MDATP Onboarding Package file location
+mdatp_managed_json_location: "mdatp_managed.json.j2"
 # Microsoft repository channel insiders-fast|insiders-slow|prod
 mdatp_microsoft_repo_channel: "prod"
 # Prevent the microsoft repository from being installed
@@ -46,6 +50,8 @@ mdatp_microsoft_repo_install_disable: false
 mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage.zip"
 # MDATP state present|absent
 mdatp_state: "present"
+# MDATP Proxy URL
+mdatp_proxy_url: ""
 # MDATP YUM package version lock mdatp-101.24032.0007-1
 mdatp_yum_package_version:
 ```
@@ -64,11 +70,18 @@ Version lock is available as `mdatp_apt_package_version_hold` for apt and `mdatp
 `mdatp_apt_package_version_hold` uses apt-mark hold that will prevent the package from being upgraded to a newer version.
 `mdatp_yum_package_version` will lock the package to the specified version.
 
+### Managed JSON Configuration
+
+If you are using a mdatp_managed.json file, you can use the `mdatp_managed_json_template` variable to apply the template. The default is `false`. If you wish to use the template, set this to `true` and set the `mdatp_managed_json_location` to the location of the template. An example template is available within templates.
+
+````yaml
+
+
 ## Dependencies
 
 ```yaml
 community.general
-```
+````
 
 ## Example Playbook
 
