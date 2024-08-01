@@ -74,14 +74,11 @@ Version lock is available as `mdatp_apt_package_version_hold` for apt and `mdatp
 
 If you are using a mdatp_managed.json file, you can use the `mdatp_managed_json_template` variable to apply the template. The default is `false`. If you wish to use the template, set this to `true` and set the `mdatp_managed_json_location` to the location of the template. An example template is available within templates.
 
-````yaml
-
-
 ## Dependencies
 
 ```yaml
 community.general
-````
+```
 
 ## Example Playbook
 
