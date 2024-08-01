@@ -21,6 +21,20 @@
       - mdatp_health_test is boolean
     quiet: true
 
+- name: "Test if mdatp_managed_json_template is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_managed_json_template is defined
+      - mdatp_managed_json_template is boolean
+    quiet: true
+
+- name: "Test if mdatp_managed_json_location is set correctly"
+  ansible.builtin.assert:
+    that:
+      - mdatp_managed_json_location is defined
+      - mdatp_managed_json_location is string
+    quiet: true
+
 - name: "Test if mdatp_microsoft_repo_channel is set correctly"
   ansible.builtin.assert:
     that:
