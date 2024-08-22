@@ -1,0 +1,37 @@
+---
+- name: "Verify"
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Check if /tmp/unsupported_distro file exists"
+      ansible.builtin.stat:
+        path: "/tmp/unsupported_distro"
+      register: unsupported_distro_file
+
+    - name: "Verify"
+      when: not unsupported_distro_file.stat.exists
+      block:
+        - name: "Get service facts"
+          ansible.builtin.service_facts:
+
+        - name: "Check mdatp service is started"
+          ansible.builtin.fail:
+            msg: "mdatp service is not started"
+          when: "'mdatp' in services and services['mdatp']['state'] != 'running'"
+
+        - name: "Check mdatp service is enabled"
+          ansible.builtin.fail:
+            msg: "mdatp service is not enabled"
+          when: "'mdatp' in services and services['mdatp.service']['status'] != 'enabled'"
+
+        - name: "Check if HTTPS_PROXY is set in mdatp.service"
+          ansible.builtin.command: "grep -q 'Environment=\"HTTPS_PROXY=https://proxy:8080\"' /usr/lib/systemd/system/mdatp.service"
+          register: grep_result
+          ignore_errors: true
+          tags:
+            - skip_ansible_lint
+
+        - name: "Fail if HTTPS_PROXY is not set in mdatp.service"
+          ansible.builtin.fail:
+            msg: "HTTPS_PROXY is not set in mdatp.service"
+          when: grep_result.rc != 0

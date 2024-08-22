@@ -1,0 +1,9 @@
+---
+- name: "Converge"
+  hosts: all
+  gather_facts: false
+  vars:
+    mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage-test.zip"
+    mdatp_proxy_url: "https://proxy:8080"
+  roles:
+    - role: "dgibbs64.mdatp"
