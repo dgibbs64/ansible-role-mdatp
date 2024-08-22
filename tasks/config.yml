@@ -48,3 +48,24 @@
   notify:
     - "Enable mdatp"
     - "Restart mdatp"
+
+- name: "Ensure HTTPS_PROXY environment variable is set in mdatp.service"
+  ansible.builtin.lineinfile:
+    path: "/usr/lib/systemd/system/mdatp.service"
+    regexp: '^Environment="HTTPS_PROXY='
+    line: 'Environment="HTTPS_PROXY={{ mdatp_proxy_url }}"'
+    insertafter: '#Environment="HTTPS_PROXY=http://address:port"'
+  when: mdatp_proxy_url is defined and mdatp_proxy_url
+  notify:
+    - "Reload systemd"
+    - "Restart mdatp"
+
+- name: "Remove HTTPS_PROXY environment variable from mdatp.service if not set"
+  ansible.builtin.lineinfile:
+    path: "/usr/lib/systemd/system/mdatp.service"
+    regexp: '^Environment="HTTPS_PROXY='
+    state: absent
+  when: mdatp_proxy_url is not defined or not mdatp_proxy_url
+  notify:
+    - "Reload systemd"
+    - "Restart mdatp"

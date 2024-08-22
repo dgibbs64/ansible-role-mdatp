@@ -48,6 +48,8 @@ mdatp_microsoft_repo_channel: "prod"
 mdatp_microsoft_repo_install_disable: false
 # MDATP Onboarding Package file location
 mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage.zip"
+# MDATP Proxy URL
+mdatp_proxy_url: ""
 # MDATP state present|absent
 mdatp_state: "present"
 # MDATP Proxy URL
@@ -73,6 +75,10 @@ Version lock is available as `mdatp_apt_package_version_hold` for apt and `mdatp
 ### Managed JSON Configuration
 
 If you are using a mdatp_managed.json file, you can use the `mdatp_managed_json_template` variable to apply the template. The default is `false`. If you wish to use the template, set this to `true` and set the `mdatp_managed_json_location` to the location of the template. An example template is available within templates.
+
+### Proxy Configuration
+
+`mdatp_proxy_url` can be used to set a proxy for MDATP. This proxy is added to mdatp systemd service file.
 
 ## Dependencies
 

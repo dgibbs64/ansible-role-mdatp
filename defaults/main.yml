@@ -17,9 +17,9 @@ mdatp_microsoft_repo_channel: "prod"
 mdatp_microsoft_repo_install_disable: false
 # MDATP Onboarding Package file location
 mdatp_onboarding_package_location: "WindowsDefenderATPOnboardingPackage.zip"
-# MDATP state present|absent
-mdatp_state: "present"
 # MDATP Proxy URL
 mdatp_proxy_url: ""
+# MDATP state present|absent
+mdatp_state: "present"
 # MDATP YUM package version lock mdatp-101.24032.0007-1
 mdatp_yum_package_version:

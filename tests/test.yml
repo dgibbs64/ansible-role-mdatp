@@ -3,7 +3,6 @@
   hosts: all
   gather_facts: false
   vars:
-    mdatp_apt_package_version_hold:
     mdatp_connectivity_test: false
     mdatp_health_test: true
     # Microsoft repository channel insiders-fast|insiders-slow|prod
@@ -15,5 +14,7 @@
     mdatp_yum_package_version:
     # Prevent the microsoft repository from being installed
     mdatp_microsoft_repo_install_disable: false
+    # MDATP Proxy URL
+    mdatp_proxy_url: ""
   roles:
     - "../../ansible-role-mdatp"

@@ -31,3 +31,8 @@
   ansible.builtin.systemd:
     name: "mdatp"
     state: started
+
+- name: "Reload systemd"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true

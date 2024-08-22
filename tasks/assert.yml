@@ -7,6 +7,7 @@
       - mdatp_apt_package_version_hold is defined
       - mdatp_apt_package_version_hold is boolean
     quiet: true
+
 - name: "Test if mdatp_connectivity_test is set correctly"
   ansible.builtin.assert:
     that:
