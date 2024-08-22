@@ -3,6 +3,10 @@
   ansible.builtin.package:
     name: "unzip"
     state: present
+  register: result
+  until: result is succeeded
+  retries: 5
+  delay: 10
 
 - name: "Ensure /opt/microsoft directory exists"
   ansible.builtin.file:
