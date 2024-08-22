@@ -62,7 +62,7 @@
 
 - name: "Remove HTTPS_PROXY environment variable from mdatp.service if not set"
   ansible.builtin.lineinfile:
-    path: "/usr/lib/systemd/system/mdatp.service"
+    path: "/etc/systemd/system/multi-user.target.wants/mdatp.service"
     regexp: '^Environment="HTTPS_PROXY='
     state: absent
   when: mdatp_proxy_url is not defined or not mdatp_proxy_url
