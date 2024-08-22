@@ -25,7 +25,7 @@
           when: "'mdatp' in services and services['mdatp.service']['status'] != 'enabled'"
 
         - name: "Check if HTTPS_PROXY is set in mdatp.service"
-          ansible.builtin.command: "grep -q 'Environment=\"HTTPS_PROXY=https://proxy:8080\"' /usr/lib/systemd/system/mdatp.service"
+          ansible.builtin.command: "grep -q 'Environment=\"HTTPS_PROXY=https://proxy:8080\"' /etc/systemd/system/multi-user.target.wants/mdatp.service"
           register: grep_result
           ignore_errors: true
           tags:

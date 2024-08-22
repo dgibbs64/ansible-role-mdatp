@@ -55,7 +55,7 @@
 
 - name: "Ensure HTTPS_PROXY environment variable is set in mdatp.service"
   ansible.builtin.lineinfile:
-    path: "/usr/lib/systemd/system/mdatp.service"
+    path: "/etc/systemd/system/multi-user.target.wants/mdatp.service"
     regexp: '^Environment="HTTPS_PROXY='
     line: 'Environment="HTTPS_PROXY={{ mdatp_proxy_url }}"'
     insertafter: '#Environment="HTTPS_PROXY=http://address:port"'
