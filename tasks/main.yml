@@ -43,13 +43,14 @@
     - name: "Version lock"
       ansible.builtin.include_tasks: version-lock.yml
 
+    - name: "Install"
+      ansible.builtin.include_tasks: install.yml
+      when: mdatp_state == "present"
+
     - name: "Configure mdatp"
       ansible.builtin.include_tasks: config.yml
       when: mdatp_state == "present"
 
-    - name: "Install"
-      ansible.builtin.include_tasks: install.yml
-      when: mdatp_state == "present"
 
     - name: "Tests"
       ansible.builtin.include_tasks: tests.yml
