@@ -34,5 +34,12 @@
 
 - name: "Reload systemd"
   become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
+  block:
+    - name: "Reload systemd"
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    - name: "Restart mdatp"
+      ansible.builtin.systemd:
+        name: "mdatp"
+        state: restarted
