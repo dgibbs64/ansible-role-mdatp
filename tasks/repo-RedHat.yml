@@ -3,7 +3,6 @@
   when: mdatp_state == "present"
   notify:
     - "Update dnf cache"
-    - "Update yum cache"
   block:
     - name: "Ensure Microsoft repository is configured (RedHat Family): {{ mdatp_microsoft_repo_channel }}"
       ansible.builtin.yum_repository:
@@ -19,7 +18,6 @@
   when: mdatp_state == "absent"
   notify:
     - "Update dnf cache"
-    - "Update yum cache"
   block:
     - name: "Ensure Microsoft repository is removed (RedHat Family): {{ mdatp_microsoft_repo_channel }}"
       ansible.builtin.yum_repository:
