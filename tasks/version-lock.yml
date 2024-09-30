@@ -28,23 +28,6 @@
         name: "{{ mdatp_yum_package_version }}"
         state: present
 
-- name: "Version lock (yum)"
-  when:
-    - ansible_pkg_mgr == "yum"
-    - mdatp_yum_package_version is defined
-    - mdatp_yum_package_version is not none
-    - mdatp_yum_package_version | length > 0
-  block:
-    - name: "Ensure yum-plugin-versionlock is instaled (yum)"
-      ansible.builtin.yum:
-        name: "yum-plugin-versionlock"
-        state: present
-
-    - name: "Version lock mdatp package (yum): {{ mdatp_yum_package_version }}"
-      community.general.yum_versionlock:
-        name: "{{ mdatp_yum_package_version }}"
-        state: present
-
 - name: "Remove version lock on mdatp package (apt)"
   ansible.builtin.dpkg_selections:
     name: "mdatp"

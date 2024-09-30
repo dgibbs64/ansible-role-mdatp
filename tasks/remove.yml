@@ -13,12 +13,6 @@
     state: absent
   when: ansible_pkg_mgr == "dnf"
 
-- name: "Ensure mdatp is removed (yum)"
-  ansible.builtin.yum:
-    name: "mdatp"
-    state: absent
-  when: ansible_pkg_mgr == "yum"
-
 - name: "Ensure /etc/opt/microsoft/mdatp and all its contents are removed"
   ansible.builtin.file:
     path: /etc/opt/microsoft/mdatp/

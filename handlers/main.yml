@@ -13,12 +13,6 @@
     update_cache: true
   when: ansible_pkg_mgr == "dnf"
 
-- name: "Update yum cache"
-  become: true
-  ansible.builtin.yum:
-    update_cache: true
-  when: ansible_pkg_mgr == "yum"
-
 - name: "Enable mdatp"
   become: true
   ansible.builtin.systemd:

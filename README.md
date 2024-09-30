@@ -21,7 +21,7 @@ Requires a <a href="https://learn.microsoft.com/en-us/defender-endpoint/microsof
 
 - AlmaLinux >= 8
 - AmazonLinux 2023
-- CentOS >= 7
+- CentOS >= 8
 - Debian >= 9
 - Fedora >= 33
 - OracleLinux >= 8
