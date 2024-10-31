@@ -9,7 +9,7 @@
     ansible_distribution_version is version(supported_distros | selectattr("name", "equalto", ansible_distribution) | map(attribute="max_version") | first, ">")) or
     ansible_architecture not in (supported_distros | selectattr("name", "equalto", ansible_distribution) | map(attribute="supported_architectures", default=[]) | first)
 
-- name: "Display if distro or architecture are supported"
+- name: "Display if distro or architecture is not supported"
   ansible.builtin.debug:
     msg: "{{ ansible_distribution }} {{ ansible_distribution_version }} on {{ ansible_architecture }} is not supported"
   when: distro_supported is false
