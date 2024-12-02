@@ -1,5 +1,5 @@
 ---
-#when: mdatp_yum_package_version is defined or mdatp_apt_package_version_hold
+# when: mdatp_yum_package_version is defined or mdatp_apt_package_version_hold
 - name: "Version lock (apt)"
   when: ansible_pkg_mgr == "apt"
   block:
