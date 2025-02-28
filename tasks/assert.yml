@@ -1,5 +1,4 @@
 ---
-# defaults file for mdatp
 
 - name: "Test if mdatp_apt_package_version_hold is set correctly"
   ansible.builtin.assert:
