@@ -18,7 +18,7 @@
 
 - name: "Ensure /opt/microsoft/mdatp directory exists"
   ansible.builtin.file:
-    path: "/etc/opt/microsoft/mdatp"
+    path: "/etc/opt/microsoft/mdatp/managed"
     state: directory
     mode: "0755"
     owner: root
@@ -26,13 +26,13 @@
 
 - name: "Check if mdatp_onboard.json exists"
   ansible.builtin.stat:
-    path: /etc/opt/microsoft/mdatp/mdatp_onboard.json
+    path: /etc/opt/microsoft/mdatp/managed/mdatp_onboard.json
   register: mdatp_onboard
 
-- name: "Extract WindowsDefenderATPOnboardingPackage.zip into /etc/opt/microsoft/mdatp"
+- name: "Extract WindowsDefenderATPOnboardingPackage.zip into /etc/opt/microsoft/mdatp/managed"
   ansible.builtin.unarchive:
     src: "{{ mdatp_onboarding_package_location }}"
-    dest: "/etc/opt/microsoft/mdatp"
+    dest: "/etc/opt/microsoft/mdatp/managed"
     mode: "0600"
     owner: root
     group: root
@@ -44,7 +44,7 @@
 - name: "Apply mdatp_managed.json template"
   ansible.builtin.template:
     src: "mdatp_managed.json.j2"
-    dest: "/etc/opt/microsoft/mdatp/mdatp_managed.json"
+    dest: "/etc/opt/microsoft/mdatp/managed/mdatp_managed.json"
     mode: "0600"
     owner: root
     group: root
