@@ -15,13 +15,16 @@
     "vscode": {
       "extensions": [
         "DavidAnson.vscode-markdownlint",
+        "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
         "github.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
         "redhat.ansible",
         "redhat.vscode-yaml",
+        "wholroyd.jinja",
         "yzhang.markdown-all-in-one"
       ]
     }
-  }
+  },
+  "postCreateCommand": "npm init -y >/dev/null 2>&1 || true && npm install --no-save prettier prettier-plugin-sh prettier-plugin-jinja-template"
 }
