@@ -1,61 +1,61 @@
 ---
-- name: "Test if mdatp_apt_package_version_hold is set correctly"
+- name: "Test that mdatp_apt_package_version_hold is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_apt_package_version_hold is defined
       - mdatp_apt_package_version_hold is boolean
     quiet: true
 
-- name: "Test if mdatp_connectivity_test is set correctly"
+- name: "Test that mdatp_connectivity_test is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_connectivity_test is defined
       - mdatp_connectivity_test is boolean
     quiet: true
 
-- name: "Test if mdatp_health_test is set correctly"
+- name: "Test that mdatp_health_test is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_health_test is defined
       - mdatp_health_test is boolean
     quiet: true
 
-- name: "Test if mdatp_managed_json_template is set correctly"
+- name: "Test that mdatp_managed_json_template is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_managed_json_template is defined
       - mdatp_managed_json_template is boolean
     quiet: true
 
-- name: "Test if mdatp_managed_json_location is set correctly"
+- name: "Test that mdatp_managed_json_location is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_managed_json_location is defined
       - mdatp_managed_json_location is string
     quiet: true
 
-- name: "Test if mdatp_microsoft_repo_channel is set correctly"
+- name: "Test that mdatp_microsoft_repo_channel is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_microsoft_repo_channel is defined
       - mdatp_microsoft_repo_channel in ['insiders-fast', 'insiders-slow', 'prod']
     quiet: true
 
-- name: "Test if mdatp_onboarding_package_location is set correctly"
+- name: "Test that mdatp_onboarding_package_location is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_onboarding_package_location is defined
       - mdatp_onboarding_package_location is string
     quiet: true
 
-- name: "Test if mdatp_state is set correctly"
+- name: "Test that mdatp_state is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_state is defined
       - mdatp_state in ['present', 'absent']
     quiet: true
 
-- name: "Test if mdatp_microsoft_repo_install_disable is set correctly"
+- name: "Test that mdatp_microsoft_repo_install_disable is set correctly"
   ansible.builtin.assert:
     that:
       - mdatp_microsoft_repo_install_disable is defined
