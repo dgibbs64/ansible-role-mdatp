@@ -18,7 +18,7 @@
     - mdatp_yum_package_version is not none
     - mdatp_yum_package_version | length > 0
   block:
-    - name: "Ensure dnf-plugins-core is instaled (dnf)"
+    - name: "Ensure dnf-plugins-core is installed (dnf)"
       ansible.builtin.dnf:
         name: "dnf-plugins-core"
         state: present

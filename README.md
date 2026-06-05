@@ -15,7 +15,7 @@ An [Ansible](https://www.ansible.com) role that installs and configures <a href=
 
 ## Requirements
 
-Requires a <a href="https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint">Microsoft Defender for Endpoint</a> License. You will also need to download `WindowsDefenderATPOnboardingPackage.zip` from the <a href="https://securitycenter.windows.com">Microsoft Defender Security Center</a>. Instuctions found <a href="https://learn.microsoft.com/en-us/defender-endpoint/linux-install-manually#download-the-onboarding-package">here</a>.
+Requires a <a href="https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint">Microsoft Defender for Endpoint</a> License. You will also need to download `WindowsDefenderATPOnboardingPackage.zip` from the <a href="https://securitycenter.windows.com">Microsoft Defender Security Center</a>. Instructions found <a href="https://learn.microsoft.com/en-us/defender-endpoint/linux-install-manually#download-the-onboarding-package">here</a>.
 
 ### Supported Distros
 
