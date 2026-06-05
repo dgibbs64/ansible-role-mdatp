@@ -51,7 +51,6 @@
       ansible.builtin.include_tasks: config.yml
       when: mdatp_state == "present"
 
-
     - name: "Tests"
       ansible.builtin.include_tasks: tests.yml
       when: mdatp_state == "present"
