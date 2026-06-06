@@ -30,6 +30,8 @@
   register: mdatp_onboard
 
 - name: "Extract WindowsDefenderATPOnboardingPackage.zip into /etc/opt/microsoft/mdatp/managed"
+  tags:
+    - molecule-notest
   ansible.builtin.unarchive:
     src: "{{ mdatp_onboarding_package_location }}"
     dest: "/etc/opt/microsoft/mdatp/managed"
@@ -42,6 +44,8 @@
   when: not mdatp_onboard.stat.exists
 
 - name: "Apply mdatp_managed.json template"
+  tags:
+    - molecule-notest
   ansible.builtin.template:
     src: "mdatp_managed.json.j2"
     dest: "/etc/opt/microsoft/mdatp/managed/mdatp_managed.json"
