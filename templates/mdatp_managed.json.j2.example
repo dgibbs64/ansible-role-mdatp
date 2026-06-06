@@ -1,24 +1,21 @@
 {
-  "antivirusEngine":{
-     "enableRealTimeProtection":false,
-     "passiveMode":true,
-     "threatTypeSettings":[
-        {
-           "key":"potentially_unwanted_application",
-           "value":"block"
-        },
-        {
-           "key":"archive_bomb",
-           "value":"audit"
-        }
-     ]
+  "antivirusEngine": {
+    "enableRealTimeProtection": false,
+    "passiveMode": true,
+    "threatTypeSettings": [
+      {
+        "key": "potentially_unwanted_application",
+        "value": "block"
+      },
+      {
+        "key": "archive_bomb",
+        "value": "audit"
+      }
+    ]
   },
-  "cloudService":{
-     "automaticDefinitionUpdateEnabled":true,
-     "automaticSampleSubmissionConsent":"safe",
-     "enabled":true,
-{% if mdatp_proxy_url | default('', True) != '' %}
-     "proxy":"{{ mdatp_proxy_url }}"
-{% endif %}
+  "cloudService": {
+    "automaticDefinitionUpdateEnabled": true,
+    "automaticSampleSubmissionConsent": "safe",
+    "enabled": true
   }
 }
