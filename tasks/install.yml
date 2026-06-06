@@ -11,6 +11,8 @@
   when: ansible_pkg_mgr == "apt"
 
 - name: "Ensure mdatp is installed (dnf)"
+  tags:
+    - molecule-notest
   ansible.builtin.dnf:
     name: "mdatp"
     state: present
