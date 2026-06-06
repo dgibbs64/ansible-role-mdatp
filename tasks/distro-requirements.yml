@@ -1,4 +1,8 @@
 ---
+- name: "Set distro_supported"
+  ansible.builtin.set_fact:
+    distro_supported: true
+
 - name: "Check if distro or architecture is supported"
   ansible.builtin.set_fact:
     distro_supported: false
