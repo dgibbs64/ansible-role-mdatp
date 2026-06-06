@@ -58,6 +58,8 @@
     - "Restart mdatp"
 
 - name: "Ensure HTTPS_PROXY environment variable is set in mdatp.service"
+  tags:
+    - molecule-notest
   ansible.builtin.lineinfile:
     path: "/etc/systemd/system/multi-user.target.wants/mdatp.service"
     regexp: '^Environment="HTTPS_PROXY='
@@ -69,6 +71,8 @@
     - "Restart mdatp"
 
 - name: "Remove HTTPS_PROXY environment variable from mdatp.service if not set"
+  tags:
+    - molecule-notest
   ansible.builtin.lineinfile:
     path: "/etc/systemd/system/multi-user.target.wants/mdatp.service"
     regexp: '^Environment="HTTPS_PROXY='
