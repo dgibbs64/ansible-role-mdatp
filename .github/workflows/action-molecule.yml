@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
@@ -61,13 +61,9 @@ jobs:
         exclude:
           - distro: rockylinux8
             ansible_core_version: latest
-          - distro: debian13
-            ansible_core_version: 2.16
-          - distro: debian13
-            ansible_core_version: latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
